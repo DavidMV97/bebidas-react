@@ -15,6 +15,7 @@ export default function Header() {
     const fetchCategories = useAppStore((state) => state.fetchCategories)
     const categories = useAppStore((state => state.categories))
     const searchRecipes = useAppStore((state => state.searchRecipes))
+    const showNotification = useAppStore((state) => state.showNotification)
 
     
 
@@ -33,7 +34,10 @@ export default function Header() {
         e.preventDefault()
 
         if (Object.values(searchFilters).includes('')) {
-            console.log('todos los campos son obligatorios');
+            showNotification({
+                text: 'All fields are required',
+                error: true
+            })
             return
         }
 
@@ -67,14 +71,14 @@ export default function Header() {
                             <label 
                                 htmlFor="ingredient"
                                 className="block text-white uppercase font-extrabold text-lg"
-                            >Nombre o Ingredientes</label>
+                            >Name or Ingredients</label>
                             
                             <input 
                                 type="text" 
                                 name="ingredient" 
                                 id="ingredient" 
                                 className="p-3 w-full rounded-lg focus:outline-none"
-                                placeholder="Nombre o Ingrediente. Ej. Vodka, Tequila, Café"
+                                placeholder="Name or Ingredient. Ex. Vodka, Tequila, Coffee"
                                 onChange={handleChange}
                                 value={searchFilters.ingredient}
                             />
@@ -83,7 +87,7 @@ export default function Header() {
                             <label 
                                 htmlFor="category"
                                 className="block text-white uppercase font-extrabold text-lg"
-                            >Categoría</label>
+                            >Category</label>
                             
                             <select 
                                 name="category" 
@@ -100,7 +104,7 @@ export default function Header() {
                         </div>
                         <input 
                             type="submit" 
-                            value="Buscar Recetas" 
+                            value="Search Recipes" 
                             className="cursor-pointer bg-orange-800 hover:bg-orange-900 text-white font-extrabold w-full p-2 rounded-lg uppercase"
                             />
                     </form>
