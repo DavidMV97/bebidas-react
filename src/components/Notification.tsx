@@ -8,9 +8,7 @@ export default function Notification() {
 
     const notification = useAppStore((state) => state.notification)
     const hideNotification = useAppStore((state) => state.hideNotification)
-    console.log('notification =>', notification.show);
     
-
     return (
         <div
             aria-live="assertive"
